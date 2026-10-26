@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Data\" />
     <Folder Include="Models\DTO\Auth\" />
     <Folder Include="Models\DTO\Categories\" />
