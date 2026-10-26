@@ -1,0 +1,6 @@
+@Trabajo_Practico_Final_2026_HostAddress = http://localhost:5276
+
+GET {{Trabajo_Practico_Final_2026_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
