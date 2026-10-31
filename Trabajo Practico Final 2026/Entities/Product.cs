@@ -10,20 +10,19 @@ namespace Trabajo_Practico_Final_2026.Entities
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } 
         public decimal Price { get; set; } 
-        public int RestaurantId { get; set; }
-        public decimal Discount { get; set; }
+        public int Discount { get; set; }
         public bool HasHappyHour { get; set; }
         public bool Featured {get; set; }
         public int RecommendedFor {  get; set; }
-        [ForeignKey("UserId")]
-        public User user { get; set; }
-        public int userId { get; set; }
-        [ForeignKey("CategoryId")]
-        public Category category { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public User User { get; set; } = null!;
         public int CategoryId { get; set; }
-        
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; } = null!;
+
 
 
     }

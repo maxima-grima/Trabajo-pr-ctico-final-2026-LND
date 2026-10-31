@@ -1,14 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Trabajo_Practico_Final_2026.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddDbContext<MenuContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MenuDb")));
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

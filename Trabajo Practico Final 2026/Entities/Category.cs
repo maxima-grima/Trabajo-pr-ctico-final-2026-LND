@@ -10,11 +10,11 @@ namespace Trabajo_Practico_Final_2026.Entities
         public int Id { get; set; }
         [Required]
          public string Name { get; set; } = string.Empty;
+        public int UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public User User { get; set; } = null!;
 
-        [ForeignKey ("UserId")]
-        public User user { get; set; }
-        public int userId { get; set; }
-        public ICollection<Product>
+        public ICollection<Product> Products { get; set; } = new List<Product>();
 
 
     }
