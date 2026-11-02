@@ -16,8 +16,7 @@ namespace Trabajo_Practico_Final_2026.Entities
         public string LastName { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public ICollection<Category> Categories { get; set; } = new List<Category>();
-        public ICollection<Product> Products { get; set; } = new List<Product>();
-    
+        public List<Category> Categories { get; set; } = new List<Category>();
+        
     }
 }

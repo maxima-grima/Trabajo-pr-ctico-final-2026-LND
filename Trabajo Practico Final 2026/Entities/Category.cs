@@ -14,7 +14,7 @@ namespace Trabajo_Practico_Final_2026.Entities
         [ForeignKey(nameof(UserId))]
         public User User { get; set; } = null!;
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public List<Product> Products { get; set; } = new List<Product>();
 
 
     }
