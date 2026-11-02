@@ -27,7 +27,6 @@ namespace Trabajo_Practico_Final_2026.Models.DTO.Products
         [Range(1, int.MaxValue, ErrorMessage = "La categoría es obligatoria.")]
         public int CategoryId { get; set; }
 
-        // El front lo manda, pero el backend lo ignora y usa el id del token.
         public int? RestaurantId { get; set; }
 
     }
