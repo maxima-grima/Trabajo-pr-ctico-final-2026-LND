@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Trabajo_Practico_Final_2026.Data;
 using Trabajo_Practico_Final_2026.Repositories.Implementations;
 using Trabajo_Practico_Final_2026.Repositories.Interfaces;
+using Trabajo_Practico_Final_2026.Services.Implementations;
+using Trabajo_Practico_Final_2026.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
