@@ -137,7 +137,7 @@ namespace Trabajo_Practico_Final_2026.Migrations
                         .IsRequired();
 
                     b.HasOne("Trabajo_Practico_Final_2026.Entities.User", "User")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -155,8 +155,6 @@ namespace Trabajo_Practico_Final_2026.Migrations
             modelBuilder.Entity("Trabajo_Practico_Final_2026.Entities.User", b =>
                 {
                     b.Navigation("Categories");
-
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
