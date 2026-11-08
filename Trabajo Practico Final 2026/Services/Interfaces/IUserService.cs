@@ -1,4 +1,5 @@
-﻿using Trabajo_Practico_Final_2026.Models.DTO.Users;
+﻿using Trabajo_Practico_Final_2026.Entities;
+using Trabajo_Practico_Final_2026.Models.DTO.Users;
 
 namespace Trabajo_Practico_Final_2026.Services.Interfaces
 {
@@ -10,5 +11,6 @@ namespace Trabajo_Practico_Final_2026.Services.Interfaces
         UserDto Create(CreateUserDto dto);
         UserDto Update(int id, int loggedUserId, UpdateUserDto dto);
         void Delete(int id, int loggedUserId);
+        User? Authenticate(string restaurantName, string password);
     }
 }

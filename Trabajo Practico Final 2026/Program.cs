@@ -1,5 +1,8 @@
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using System.Text;
+using System.Text.Json.Serialization;
 using Trabajo_Practico_Final_2026.Data;
 using Trabajo_Practico_Final_2026.Filters;
 using Trabajo_Practico_Final_2026.Repositories.Implementations;
@@ -31,6 +34,32 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader();
         });
 });
+builder.Services.AddSwaggerGen(setupAction =>
+{
+setupAction.AddSecurityDefinition("ApiBearerAuth", new OpenApiSecurityScheme
+{
+    Type = SecuritySchemeType.Http,
+    Scheme = "bearer",
+    Description = "Acá pegar el token generado al loguearse."
+});
+
+setupAction.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+{
+    [new OpenApiSecuritySchemeReference("ApiBearerAuth", document)] = []
+});
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Authentication:Issuer"],
+            ValidAudience = builder.Configuration["Authentication:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
+        };
+    });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -52,6 +81,8 @@ app.UseHttpsRedirection();
 app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
+
+app.UseAuthorization(); 
 
 app.MapControllers();
 

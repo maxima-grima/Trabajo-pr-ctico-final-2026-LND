@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Trabajo_Practico_Final_2026.Models.DTO.Users;
 using Trabajo_Practico_Final_2026.Services.Interfaces;
 
@@ -6,6 +7,7 @@ namespace Trabajo_Practico_Final_2026.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UsersController : BaseController
     {
         private readonly IUserService _userService;
