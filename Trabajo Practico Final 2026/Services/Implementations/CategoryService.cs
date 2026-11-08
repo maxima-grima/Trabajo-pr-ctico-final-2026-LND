@@ -9,20 +9,26 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public CategoryService(ICategoryRepository categoryRepository, IUserRepository userRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IUserService userService)
         {
             _categoryRepository = categoryRepository;
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public List<CategoryDto> GetByRestaurant(int restaurantId)
         {
-            if (_userRepository.GetById(restaurantId) == null)
+            if (!_userService.Exists(restaurantId))
                 throw new NotFoundException("El restaurante no existe.");
 
             return _categoryRepository.GetByUserId(restaurantId).Select(ToDto).ToList();
+        }
+
+        public bool BelongsToUser(int categoryId, int userId)
+        {
+            Category? category = _categoryRepository.GetById(categoryId);
+            return category != null && category.UserId == userId;
         }
 
         public CategoryDto Create(int loggedUserId, CreateCategoryDto dto)

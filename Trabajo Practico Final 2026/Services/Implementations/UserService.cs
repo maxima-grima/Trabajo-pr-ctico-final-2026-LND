@@ -20,6 +20,11 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
             return _userRepository.GetAll().Select(ToDto).ToList();
         }
 
+        public bool Exists(int id)
+        {
+            return _userRepository.GetById(id) != null;
+        }
+
         public UserDto GetById(int id)
         {
             User user = _userRepository.GetById(id)

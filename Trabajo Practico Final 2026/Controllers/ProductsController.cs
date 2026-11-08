@@ -4,7 +4,8 @@ using Trabajo_Practico_Final_2026.Services.Interfaces;
 
 namespace Trabajo_Practico_Final_2026.Controllers
 {
-    [Route("api/products")]
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProductsController : BaseController
     {
         private readonly IProductService _productService;
@@ -14,48 +15,51 @@ namespace Trabajo_Practico_Final_2026.Controllers
             _productService = productService;
         }
 
-        [HttpGet("{id:int}")]
-        public ActionResult<ProductDto> GetById(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
         {
             return Ok(_productService.GetById(id));
         }
 
         [HttpGet("me")]
-        public ActionResult<List<ProductDto>> GetMine()
+        public IActionResult GetMine()
         {
             return Ok(_productService.GetMine(GetLoggedUserId()));
         }
 
         [HttpPost]
-        public ActionResult<ProductDto> Create([FromBody] CreateProductDto dto)
+        public IActionResult Create(CreateProductDto dto)
         {
             ProductDto product = _productService.Create(GetLoggedUserId(), dto);
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
 
-        [HttpPut("{id:int}")]
-        public ActionResult<ProductDto> Update(int id, [FromBody] UpdateProductDto dto)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, UpdateProductDto dto)
         {
-            return Ok(_productService.Update(id, GetLoggedUserId(), dto));
+            _productService.Update(id, GetLoggedUserId(), dto);
+            return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _productService.Delete(id, GetLoggedUserId());
             return NoContent();
         }
 
-        [HttpPut("{id:int}/discount")]
-        public ActionResult<ProductDto> SetDiscount(int id, [FromBody] DiscountDto dto)
+        [HttpPut("{id}/discount")]
+        public IActionResult SetDiscount(int id, DiscountDto dto)
         {
-            return Ok(_productService.SetDiscount(id, GetLoggedUserId(), dto));
+            _productService.SetDiscount(id, GetLoggedUserId(), dto);
+            return NoContent();
         }
 
-        [HttpPut("{id:int}/happyHour")]
-        public ActionResult<ProductDto> SetHappyHour(int id, [FromBody] HappyHourDto dto)
+        [HttpPut("{id}/happy-hour")]
+        public IActionResult SetHappyHour(int id, HappyHourDto dto)
         {
-            return Ok(_productService.SetHappyHour(id, GetLoggedUserId(), dto));
+            _productService.SetHappyHour(id, GetLoggedUserId(), dto);
+            return NoContent();
         }
     }
 }

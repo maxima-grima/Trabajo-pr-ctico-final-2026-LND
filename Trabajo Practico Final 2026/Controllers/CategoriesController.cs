@@ -4,7 +4,8 @@ using Trabajo_Practico_Final_2026.Services.Interfaces;
 
 namespace Trabajo_Practico_Final_2026.Controllers
 {
-    [Route("api/categories")]
+    [ApiController]
+    [Route("api/[controller]")]
     public class CategoriesController : BaseController
     {
         private readonly ICategoryService _categoryService;
@@ -15,19 +16,20 @@ namespace Trabajo_Practico_Final_2026.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CategoryDto> Create([FromBody] CreateCategoryDto dto)
+        public IActionResult Create(CreateCategoryDto dto)
         {
             CategoryDto category = _categoryService.Create(GetLoggedUserId(), dto);
-            return StatusCode(StatusCodes.Status201Created, category);
+            return Created($"/api/users/{category.RestaurantId}/categories", category);
         }
 
-        [HttpPut("{id:int}")]
-        public ActionResult<CategoryDto> Update(int id, [FromBody] UpdateCategoryDto dto)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, UpdateCategoryDto dto)
         {
-            return Ok(_categoryService.Update(id, GetLoggedUserId(), dto));
+            _categoryService.Update(id, GetLoggedUserId(), dto);
+            return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _categoryService.Delete(id, GetLoggedUserId());

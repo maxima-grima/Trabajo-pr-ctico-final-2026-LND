@@ -9,19 +9,19 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly ICategoryService _categoryService;
+        private readonly IUserService _userService;
 
-        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IUserRepository userRepository)
+        public ProductService(IProductRepository productRepository, ICategoryService categoryService, IUserService userService)
         {
             _productRepository = productRepository;
-            _categoryRepository = categoryRepository;
-            _userRepository = userRepository;
+            _categoryService = categoryService;
+            _userService = userService;
         }
 
         public List<ProductDto> GetByRestaurant(int restaurantId, int? categoryId, bool? featured, bool? onPromotion)
         {
-            if (_userRepository.GetById(restaurantId) == null)
+            if (!_userService.Exists(restaurantId))
                 throw new NotFoundException("El restaurante no existe.");
 
             return _productRepository
@@ -115,8 +115,7 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
 
         private void ValidateCategory(int categoryId, int loggedUserId)
         {
-            Category? category = _categoryRepository.GetById(categoryId);
-            if (category == null || category.UserId != loggedUserId)
+            if (!_categoryService.BelongsToUser(categoryId, loggedUserId))
                 throw new BadRequestException("La categoría no existe o no pertenece a tu restaurante.");
         }
 
