@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Practico_Final_2026.Data;
+using Trabajo_Practico_Final_2026.Filters;
 using Trabajo_Practico_Final_2026.Repositories.Implementations;
 using Trabajo_Practico_Final_2026.Repositories.Interfaces;
 using Trabajo_Practico_Final_2026.Services.Implementations;
@@ -7,7 +8,8 @@ using Trabajo_Practico_Final_2026.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+    options.Filters.Add<ApiExceptionFilter>());
 builder.Services.AddDbContext<MenuContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MenuDb")));
 builder.Services.AddOpenApi();

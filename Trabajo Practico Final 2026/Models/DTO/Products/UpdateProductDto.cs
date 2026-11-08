@@ -27,6 +27,5 @@ public class UpdateProductDto
     [Range(1, int.MaxValue, ErrorMessage = "La categoría es obligatoria.")]
     public int CategoryId { get; set; }
 
-    // Ignorado por el service (se usa el id del token).
     public int? RestaurantId { get; set; }
 }

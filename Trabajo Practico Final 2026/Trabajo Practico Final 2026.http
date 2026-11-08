@@ -1,6 +1,50 @@
-@Trabajo_Practico_Final_2026_HostAddress = http://localhost:5276
+@host = http://localhost:5276
 
-GET {{Trabajo_Practico_Final_2026_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "restaurantName": "La Esquina",
+  "password": "clave123",
+  "firstName": "Máxima",
+  "lastName": "Grima",
+  "address": "Córdoba 1200, Rosario",
+  "phoneNumber": "3415551234"
+}
 
 ###
+
+GET {{host}}/api/users
+
+###
+
+GET {{host}}/api/users/1
+
+###
+
+GET {{host}}/api/users/1/categories
+
+###
+
+GET {{host}}/api/users/1/products
+
+###
+
+GET {{host}}/api/users/1/products?featured=true
+
+###
+
+GET {{host}}/api/users/1/products?onPromotion=true
+
+###
+
+GET {{host}}/api/users/99
+
+###
+
+POST {{host}}/api/categories
+Content-Type: application/json
+
+{
+  "name": "Pastas"
+}
