@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Trabajo_Practico_Final_2026.Models.DTO.Products;
 using Trabajo_Practico_Final_2026.Services.Interfaces;
 
@@ -6,6 +7,7 @@ namespace Trabajo_Practico_Final_2026.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ProductsController : BaseController
     {
         private readonly IProductService _productService;
@@ -15,6 +17,7 @@ namespace Trabajo_Practico_Final_2026.Controllers
             _productService = productService;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -53,6 +56,19 @@ namespace Trabajo_Practico_Final_2026.Controllers
         {
             _productService.SetDiscount(id, GetLoggedUserId(), dto);
             return NoContent();
+        }
+
+        [HttpPost("import")]
+        public IActionResult Import(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest(new { message = "Tenés que adjuntar un archivo CSV." });
+
+            if (!Path.GetExtension(file.FileName).Equals(".csv", StringComparison.OrdinalIgnoreCase))
+                return BadRequest(new { message = "El archivo tiene que ser .csv." });
+
+            using Stream stream = file.OpenReadStream();
+            return Ok(_productService.Import(GetLoggedUserId(), stream));
         }
 
         [HttpPut("{id}/happy-hour")]

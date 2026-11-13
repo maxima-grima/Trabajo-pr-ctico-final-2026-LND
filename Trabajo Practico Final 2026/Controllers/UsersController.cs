@@ -21,18 +21,21 @@ namespace Trabajo_Practico_Final_2026.Controllers
             _productService = productService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(_userService.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Ok(_userService.GetById(id));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Create(CreateUserDto dto)
         {
@@ -54,12 +57,14 @@ namespace Trabajo_Practico_Final_2026.Controllers
             return NoContent();
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}/categories")]
         public IActionResult GetCategories(int id)
         {
             return Ok(_categoryService.GetByRestaurant(id));
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}/products")]
         public IActionResult GetProducts(int id, int? categoryId, bool? featured, bool? onPromotion)
         {

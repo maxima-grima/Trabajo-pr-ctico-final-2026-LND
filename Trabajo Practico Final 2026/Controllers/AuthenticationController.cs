@@ -1,31 +1,29 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Trabajo_Practico_Final_2026.Models.DTO.Auth;
+using Trabajo_Practico_Final_2026.Services.Interfaces;
 
 namespace Trabajo_Practico_Final_2026.Controllers
 {
-    [Route("api/authentication")]
     [ApiController]
-    [Authorize]
+    [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
     {
-        private readonly ICustomAuthenticationService _customAuthenticationService;
-        public AuthenticationController(ICustomAuthenticationService customAuthenticationService)
-            {
-                _customAuthenticationService = customAuthenticationService;
-            }
+        private readonly IAuthenticationService _authenticationService;
 
-            [HttpPost("authenticate")]
-            public IActionResult Autenticar([FromBody] CredentialsDtoRequest authenticationRequest)
-            {
-                string? token = _customAuthenticationService.Autenticar(authenticationRequest);
+        public AuthenticationController(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
 
-                if (token is null)
-                {
-                    return Unauthorized();
-                }
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(LoginDto credentials)
+        {
+            string? token = _authenticationService.Authenticate(credentials);
 
-                return Ok(token);
-            }
+            if (token is null)
+                return Unauthorized(new { message = "Nombre de restaurante o contraseña incorrectos." });
+
+            return Ok(new TokenDto { Token = token });
         }
     }
-
+}

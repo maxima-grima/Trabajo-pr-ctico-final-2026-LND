@@ -25,6 +25,16 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
             return _userRepository.GetById(id) != null;
         }
 
+        public User? Authenticate(string restaurantName, string password)
+        {
+            User? user = _userRepository.GetByRestaurantName(restaurantName);
+
+            if (user == null || user.Password != password)
+                return null;
+
+            return user;
+        }
+
         public UserDto GetById(int id)
         {
             User user = _userRepository.GetById(id)

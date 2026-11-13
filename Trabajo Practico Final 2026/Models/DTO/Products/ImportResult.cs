@@ -2,9 +2,9 @@
 {
     public class ImportResult
     {
-        public int CategoriasCreadas { get; set; }
-        public int ProductosCreados { get; set; }
-        public int ProductosActualizados { get; set; }
-        public List<string> Errores { get; set; } = new();
+        public int CategoriesCreated { get; set; }
+        public int ProductsCreated { get; set; }
+        public int ProductsUpdated { get; set; }
+        public List<string> Errors { get; set; } = new();
     }
 }

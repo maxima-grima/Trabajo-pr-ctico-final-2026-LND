@@ -1,4 +1,5 @@
 @host = http://localhost:5276
+@token = pegar-aca-el-token
 
 POST {{host}}/api/users
 Content-Type: application/json
@@ -14,11 +15,59 @@ Content-Type: application/json
 
 ###
 
-GET {{host}}/api/users
+POST {{host}}/api/authentication/authenticate
+Content-Type: application/json
+
+{
+  "restaurantName": "La Esquina",
+  "password": "clave123"
+}
 
 ###
 
-GET {{host}}/api/users/1
+POST {{host}}/api/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Pastas"
+}
+
+###
+
+POST {{host}}/api/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Ravioles de ricota",
+  "description": "Con salsa fileto",
+  "price": 12800,
+  "discount": 10,
+  "hasHappyHour": false,
+  "featured": true,
+  "recommendedFor": 1,
+  "categoryId": 1
+}
+
+###
+
+GET {{host}}/api/products/me
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{host}}/api/products/1/happy-hour
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "hasHappyHour": true
+}
+
+###
+
+GET {{host}}/api/users
 
 ###
 
@@ -30,15 +79,11 @@ GET {{host}}/api/users/1/products
 
 ###
 
-GET {{host}}/api/users/1/products?featured=true
-
-###
-
 GET {{host}}/api/users/1/products?onPromotion=true
 
 ###
 
-GET {{host}}/api/users/99
+GET {{host}}/api/users/1/products?featured=true
 
 ###
 
@@ -46,5 +91,5 @@ POST {{host}}/api/categories
 Content-Type: application/json
 
 {
-  "name": "Pastas"
+  "name": "Sin token"
 }

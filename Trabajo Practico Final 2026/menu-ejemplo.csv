@@ -1,0 +1,45 @@
+Categoria,Nombre,Descripcion,Precio,Descuento,HappyHour,Destacado,RecomendadoPara
+Entradas,Provoleta,Provolone a la parrilla con orégano y aceite de oliva,8500,0,false,true,2
+Entradas,Empanadas de carne,Cortada a cuchillo y horneadas (docena),18000,10,false,true,4
+Entradas,Rabas,Anillos de calamar rebozados con limón,14500,0,false,false,2
+Entradas,Bruschettas,Pan de campo con tomate y albahaca fresca,7200,0,false,false,2
+Entradas,Tabla de fiambres,Jamón crudo y salame y quesos y aceitunas,22000,15,false,true,4
+Entradas,Papas bravas,Papas rústicas con salsa picante y alioli,6900,0,true,false,2
+Parrilla,Bife de chorizo,400 g con guarnición a elección,24500,0,false,true,1
+Parrilla,Vacío,Vacío tierno a la parrilla con chimichurri,21000,0,false,false,1
+Parrilla,Entraña,Entraña fina con papas al rescoldo,23500,10,false,false,1
+Parrilla,Parrillada completa,Asado y vacío y chorizo y morcilla y molleja,52000,0,false,true,3
+Parrilla,Choripán,Chorizo artesanal en pan francés con chimichurri,6500,0,true,false,1
+Parrilla,Pollo a la parrilla,Medio pollo deshuesado con limón y hierbas,15800,0,false,false,1
+Pastas,Ravioles de ricota,Con salsa fileto o crema a elección,12800,0,false,true,1
+Pastas,Sorrentinos de jamón y queso,Con salsa rosa,13900,10,false,false,1
+Pastas,Ñoquis de papa,Con salsa bolognesa,11500,0,false,false,1
+Pastas,Tallarines caseros,Al huevo con pesto de albahaca,11200,0,false,false,1
+Pastas,Lasagna de verduras,Espinaca y calabaza y salsa blanca gratinada,14200,0,false,true,1
+Pizzas,Muzzarella,Salsa de tomate y muzzarella y aceitunas,12000,0,true,false,2
+Pizzas,Napolitana,Muzzarella con tomate en rodajas y ajo,13800,0,false,true,2
+Pizzas,Fugazzeta,Rellena con muzzarella y cebolla,14500,0,false,false,2
+Pizzas,Calabresa,Muzzarella con longaniza calabresa,14900,10,false,false,2
+Pizzas,Cuatro quesos,Muzzarella y roquefort y provolone y parmesano,15900,0,false,false,2
+Ensaladas,Ensalada César,Lechuga y pollo grillado y croutons y parmesano,11800,0,false,true,1
+Ensaladas,Ensalada mixta,Lechuga y tomate y cebolla,6200,0,false,false,1
+Ensaladas,Ensalada caprese,Tomate y muzzarella de búfala y albahaca,9800,0,false,false,1
+Ensaladas,Bowl de quinoa,Quinoa con palta y garbanzos y vegetales asados,12500,15,false,false,1
+Postres,Flan casero,Con dulce de leche y crema,5800,0,false,true,1
+Postres,Panqueques con dulce de leche,Dos panqueques flambeados,6500,0,false,false,1
+Postres,Tiramisú,Receta clásica con café y mascarpone,7900,10,false,true,1
+Postres,Helado artesanal,Tres bochas a elección,6000,0,true,false,1
+Postres,Volcán de chocolate,Con centro líquido y helado de crema,8200,0,false,false,1
+Postres,Ensalada de frutas,Frutas de estación,5200,0,false,false,1
+Bebidas,Agua mineral,500 ml con o sin gas,2500,0,false,false,1
+Bebidas,Gaseosa,Línea Coca-Cola 500 ml,3200,0,false,false,1
+Bebidas,Limonada,Con menta y jengibre (jarra),7500,0,true,true,3
+Bebidas,Jugo de naranja exprimido,Vaso de 400 ml,4200,0,false,false,1
+Bebidas,Cerveza tirada,Pinta de rubia o roja o negra,5500,0,true,true,1
+Bebidas,Fernet con cola,Clásico en vaso de 500 ml,6800,0,true,false,1
+Bebidas,Copa de vino,Malbec o Cabernet Sauvignon,5900,0,true,false,1
+Bebidas,Botella de vino Malbec,750 ml de Mendoza,19500,10,false,true,2
+Cafetería,Café espresso,Café de especialidad,2800,0,false,false,1
+Cafetería,Cortado,Espresso con un toque de leche,3200,0,false,false,1
+Cafetería,Café con leche y medialunas,Con dos medialunas de manteca,6500,20,false,true,1
+Cafetería,Submarino,Leche caliente con barra de chocolate,4500,0,false,false,1
