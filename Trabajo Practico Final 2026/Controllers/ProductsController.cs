@@ -71,6 +71,12 @@ namespace Trabajo_Practico_Final_2026.Controllers
             return Ok(_productService.Import(GetLoggedUserId(), stream));
         }
 
+        [HttpPost("import-from-sheet")]
+        public async Task<IActionResult> ImportFromSheet(ImportFromSheetDto dto)
+        {
+            return Ok(await _productService.ImportFromSheetAsync(GetLoggedUserId(), dto.Url));
+        }
+
         [HttpPut("{id}/happy-hour")]
         public IActionResult SetHappyHour(int id, HappyHourDto dto)
         {

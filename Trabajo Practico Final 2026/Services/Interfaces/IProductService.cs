@@ -13,5 +13,6 @@ namespace Trabajo_Practico_Final_2026.Services.Interfaces
         ProductDto SetDiscount(int id, int loggedUserId, DiscountDto dto);
         ProductDto SetHappyHour(int id, int loggedUserId, HappyHourDto dto);
         ImportResult Import(int loggedUserId, Stream csvStream);
+        Task<ImportResult> ImportFromSheetAsync(int loggedUserId, string sheetUrl);
     }
 }

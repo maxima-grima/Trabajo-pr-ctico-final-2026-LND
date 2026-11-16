@@ -13,12 +13,14 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
         private readonly IProductRepository _productRepository;
         private readonly ICategoryService _categoryService;
         private readonly IUserService _userService;
+        private readonly IGoogleSheetsService _googleSheetsService;
 
-        public ProductService(IProductRepository productRepository, ICategoryService categoryService, IUserService userService)
+        public ProductService(IProductRepository productRepository, ICategoryService categoryService, IUserService userService, IGoogleSheetsService googleSheetsService)
         {
             _productRepository = productRepository;
             _categoryService = categoryService;
             _userService = userService;
+            _googleSheetsService = googleSheetsService;
         }
 
         public List<ProductDto> GetByRestaurant(int restaurantId, int? categoryId, bool? featured, bool? onPromotion)
@@ -213,6 +215,12 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
             }
 
             return result;
+        }
+
+        public async Task<ImportResult> ImportFromSheetAsync(int loggedUserId, string sheetUrl)
+        {
+            using Stream csvStream = await _googleSheetsService.DownloadCsvAsync(sheetUrl);
+            return Import(loggedUserId, csvStream);
         }
 
         private static List<string> ParseCsvLine(string line)

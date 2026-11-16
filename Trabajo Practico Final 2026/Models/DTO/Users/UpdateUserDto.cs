@@ -7,7 +7,7 @@ namespace Trabajo_Practico_Final_2026.Models.DTO.Users
         [Required(ErrorMessage = "El nombre del restaurante es obligatorio.")]
         [StringLength(100, MinimumLength = 2)]
         public string RestaurantName { get; set; } = string.Empty;
-        [StringLength(100, MinimumLength = 6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres.")]
+        [RegularExpression(@"^.{6,100}$", ErrorMessage = "La contraseña debe tener entre 6 y 100 caracteres.")]
         public string? Password { get; set; }
 
         [Required]
