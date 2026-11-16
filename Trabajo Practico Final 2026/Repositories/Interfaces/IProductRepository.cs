@@ -8,6 +8,7 @@ namespace Trabajo_Practico_Final_2026.Repositories.Interfaces
         Product? GetById(int id);
         Product Create(Product product);
         void Update(Product product);
+        void UpdateRange(List<Product> products);
         void Delete(Product product);
     }
 }

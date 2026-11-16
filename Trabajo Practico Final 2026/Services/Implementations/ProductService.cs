@@ -106,6 +106,24 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
             return ToDto(product);
         }
 
+        public void IncreasePrices(int loggedUserId, PriceIncreaseDto dto)
+        {
+            if (dto.CategoryId.HasValue)
+                ValidateCategory(dto.CategoryId.Value, loggedUserId);
+
+            List<Product> products = _productRepository.GetByUserId(loggedUserId, dto.CategoryId);
+
+            if (products.Count == 0)
+                throw new NotFoundException("No hay productos para aumentar.");
+
+            decimal factor = 1 + dto.Percent / 100;
+
+            foreach (Product product in products)
+                product.Price = Math.Round(product.Price * factor, 2);
+
+            _productRepository.UpdateRange(products);
+        }
+
         public ImportResult Import(int loggedUserId, Stream csvStream)
         {
             ImportResult result = new ImportResult();

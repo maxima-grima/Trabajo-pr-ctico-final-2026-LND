@@ -29,7 +29,20 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
         {
             User? user = _userRepository.GetByRestaurantName(restaurantName);
 
-            if (user == null || user.Password != password)
+            if (user == null)
+                return null;
+
+            if (!IsHashed(user.Password))
+            {
+                if (user.Password != password)
+                    return null;
+
+                user.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                _userRepository.Update(user);
+                return user;
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
                 return null;
 
             return user;
@@ -50,7 +63,7 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
             User user = new User
             {
                 RestaurantName = dto.RestaurantName,
-                Password = dto.Password,
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Address = dto.Address,
@@ -79,7 +92,7 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
             user.PhoneNumber = dto.PhoneNumber;
 
             if (!string.IsNullOrWhiteSpace(dto.Password))
-                user.Password = dto.Password;
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
             _userRepository.Update(user);
             return ToDto(user);
@@ -94,6 +107,11 @@ namespace Trabajo_Practico_Final_2026.Services.Implementations
                 ?? throw new NotFoundException("El restaurante no existe.");
 
             _userRepository.Delete(user);
+        }
+
+        private static bool IsHashed(string password)
+        {
+            return password.StartsWith("$2");
         }
 
         private static UserDto ToDto(User user)

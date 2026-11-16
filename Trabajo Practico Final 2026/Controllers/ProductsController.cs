@@ -58,6 +58,13 @@ namespace Trabajo_Practico_Final_2026.Controllers
             return NoContent();
         }
 
+        [HttpPut("prices")]
+        public IActionResult IncreasePrices(PriceIncreaseDto dto)
+        {
+            _productService.IncreasePrices(GetLoggedUserId(), dto);
+            return NoContent();
+        }
+
         [HttpPost("import")]
         public IActionResult Import(IFormFile file)
         {

@@ -44,6 +44,12 @@ namespace Trabajo_Practico_Final_2026.Repositories.Implementations
             _context.SaveChanges();
         }
 
+        public void UpdateRange(List<Product> products)
+        {
+            _context.Products.UpdateRange(products);
+            _context.SaveChanges();
+        }
+
         public void Delete(Product product)
         {
             _context.Products.Remove(product);
